@@ -6,7 +6,5 @@ EXPOSE 4873
 # Instala curl para el health check
 USER root
 RUN apk add --no-cache curl
+RUN apk add --no-cache nano
 USER verdaccio
-
-# Copia la configuración
-COPY ./conf/config.yaml /verdaccio/conf/config.yaml

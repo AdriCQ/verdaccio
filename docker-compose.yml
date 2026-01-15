@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   verdaccio:
-    image: verdaccio/verdaccio
+    build: .
     ports:
       - "4873:4873" # <-- Esto expone el servicio a tu red local
     volumes:
@@ -10,6 +10,12 @@ services:
       - verdaccio-plugins:/verdaccio/plugins
       - ./conf:/verdaccio/conf
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4873"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
 volumes:
   verdaccio-storage:
