@@ -1,15 +1,8 @@
-# ./config/config.yaml
-storage: /verdaccio/storage
-plugins: /verdaccio/plugins
-
-web:
-  title: AdriC NPM Registry
-  sort_packages: asc
+storage: ./storage
 
 auth:
   htpasswd:
-    file: /verdaccio/storage/htpasswd
-    max_users: -1  # unlimited
+    file: ./htpasswd
 
 uplinks:
   npmjs:
@@ -19,20 +12,19 @@ packages:
   '@*/*':
     access: $all
     publish: $authenticated
+    unpublish: $authenticated
     proxy: npmjs
-
   '**':
     access: $all
     publish: $authenticated
+    unpublish: $authenticated
     proxy: npmjs
 
-server:
-  keepAliveTimeout: 60
-
 middlewares:
-  audit: true
+  audit:
+    enabled: true
 
-logs:
+log:
   type: stdout
   format: pretty
   level: http
