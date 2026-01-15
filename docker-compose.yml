@@ -7,7 +7,7 @@ services:
       - "4873:4873"
     volumes:
       - verdaccio-storage:/verdaccio/storage
-      - ./config.yaml:/verdaccio/conf/config.yaml
+      - verdaccio-conf:/verdaccio/conf/config.yaml
     environment:
       - VERDACCIO_PORT=4873
 
