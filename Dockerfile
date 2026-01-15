@@ -1,14 +1,9 @@
 FROM verdaccio/verdaccio:5
 
+# Instala curl para el health check
 USER root
-
-# Instalar plugin S3
-RUN npm install -g verdaccio-aws-s3-storage
-
-# Copiar config
-COPY config.yaml /verdaccio/conf/config.yaml
-
-# Permisos correctos
-RUN chown verdaccio:verdaccio /verdaccio/conf/config.yaml
-
+RUN apk add --no-cache curl
 USER verdaccio
+
+# Copia la configuración personalizada
+COPY ./conf/config.yaml /verdaccio/conf/config.yaml

@@ -1,8 +1,24 @@
+# Minimal Verdaccio config with built-in auth
 storage: /verdaccio/storage
+plugins: /verdaccio/plugins
+
+web:
+  title: NPM Registry
+  enable: true
 
 auth:
   htpasswd:
     file: /verdaccio/storage/htpasswd
+    max_users: -1  # ilimitados
+
+security:
+  api:
+    jwt:
+      sign:
+        expiresIn: 60d
+  web:
+    sign:
+      expiresIn: 7d
 
 uplinks:
   npmjs:
@@ -12,19 +28,12 @@ packages:
   '@*/*':
     access: $all
     publish: $authenticated
-    unpublish: $authenticated
     proxy: npmjs
+
   '**':
     access: $all
     publish: $authenticated
-    unpublish: $authenticated
     proxy: npmjs
 
-middlewares:
-  audit:
-    enabled: true
-
-log:
-  type: stdout
-  format: pretty
-  level: http
+logs:
+  - { type: stdout, format: pretty, level: http }
