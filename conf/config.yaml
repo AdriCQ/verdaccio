@@ -68,7 +68,7 @@ web:
 # https://verdaccio.org/docs/configuration#authentication
 auth:
   htpasswd:
-    file: ./htpasswd
+    file: /verdaccio/storage/htpasswd
     # Maximum amount of users allowed to register, defaults to "+inf".
     # You can set this to -1 to disable registration.
     # max_users: 1000
