@@ -2,7 +2,7 @@ storage: /verdaccio/storage
 
 auth:
   htpasswd:
-    file: ./htpasswd
+    file: /verdaccio/storage/htpasswd
 
 uplinks:
   npmjs:
